@@ -15,54 +15,76 @@ const navItems = [
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isOnHero, setIsOnHero] = useState(true)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const hero = document.querySelector('#home')
+    if (!hero) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setIsOnHero(entry.isIntersecting)
+      },
+      { root: null, threshold: 0.3 }
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
+
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
+    const element = document.querySelector(href) as HTMLElement | null
+    const nav = document.querySelector('nav') as HTMLElement | null
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      // calcular altura real del nav, incluyendo menú abierto móvil
+      const navHeight = (nav?.getBoundingClientRect().height ?? 0) + 4
+      const elementTop =
+        element.getBoundingClientRect().top + window.pageYOffset
+      window.scrollTo({ top: elementTop - navHeight, behavior: 'smooth' })
     }
     setIsOpen(false)
   }
+
+  const isTransparent = isOnHero && !isOpen && !isScrolled
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/90 backdrop-blur-md shadow-lg' 
-          : 'bg-transparent'
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        isTransparent
+          ? 'bg-transparent'
+          : 'bg-white/90 shadow-lg backdrop-blur-md'
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex h-16 items-center justify-between lg:h-20">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-2"
           >
-            <div className="w-10 h-10 bg-gradient-to-r from-casino-gold to-casino-purple rounded-full flex items-center justify-center">
-              <Crown className="w-6 h-6 text-black" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-casino-amber to-casino-orange">
+              <Crown
+                className={`h-6 w-6 ${isTransparent ? 'text-white' : 'text-black'}`}
+              />
             </div>
-            <span className={`text-xl font-bold ${
-              isScrolled ? 'text-gray-900' : 'text-white'
-            }`}>
+            <span
+              className={`text-lg font-bold lg:text-xl ${isTransparent ? 'text-white' : 'text-gray-900'}`}
+            >
               Casino Royale
             </span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden items-center space-x-8 lg:flex">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
@@ -70,14 +92,13 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className={`text-sm font-medium transition-colors duration-300 hover:text-casino-gold ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
+                className={`text-sm font-medium transition-colors duration-300 hover:text-casino-amber ${
+                  isTransparent ? 'text-white' : 'text-gray-700'
                 }`}
               >
                 {item.name}
               </motion.button>
             ))}
-
           </div>
 
           {/* Mobile Menu Button */}
@@ -86,9 +107,14 @@ export function Navigation() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className={isScrolled ? 'text-gray-700' : 'text-white'}
+              aria-label="Abrir menú"
+              className={isTransparent ? 'text-white' : 'text-gray-700'}
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -100,19 +126,18 @@ export function Navigation() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-white/95 backdrop-blur-md rounded-b-2xl shadow-xl overflow-hidden"
+              className="overflow-hidden rounded-b-2xl bg-white/95 shadow-xl backdrop-blur-md lg:hidden"
             >
-              <div className="py-4 space-y-2">
+              <div className="space-y-1 py-3">
                 {navItems.map((item) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 hover:text-casino-purple transition-colors duration-200"
+                    className="block w-full px-4 py-3 text-left text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-casino-amber"
                   >
                     {item.name}
                   </button>
                 ))}
-
               </div>
             </motion.div>
           )}
@@ -120,4 +145,4 @@ export function Navigation() {
       </div>
     </motion.nav>
   )
-} 
+}

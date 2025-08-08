@@ -10,20 +10,20 @@ export default function HomePage() {
     <>
       <Navigation />
       <main className="min-h-screen">
-        <div id="home">
+        <div id="home" className="scroll-mt-20 lg:scroll-mt-24">
           <HeroSection />
         </div>
-        <div id="testimonials">
+        <div id="testimonials" className="scroll-mt-20 lg:scroll-mt-24">
           <TestimonialsSection />
         </div>
-        <div id="about">
+        <div id="about" className="scroll-mt-20 lg:scroll-mt-24">
           <AboutSection />
         </div>
-        <div id="legal">
+        <div id="legal" className="scroll-mt-20 lg:scroll-mt-24">
           <LegalSection />
         </div>
         <ChatbotWidget />
       </main>
     </>
   )
-} 
+}

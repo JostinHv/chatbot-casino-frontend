@@ -9,11 +9,11 @@ import { SlotMachine } from '@/components/games/SlotMachine'
 
 export function HeroSection() {
   return (
-    <section className="min-h-screen casino-gradient flex items-center relative overflow-hidden">
+    <section className="casino-gradient relative flex min-h-[90vh] items-center overflow-hidden pt-16 lg:min-h-screen lg:pt-0">
       {/* Elementos de fondo animados */}
       <BackgroundEffects />
 
-      <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="container relative z-10 mx-auto grid grid-cols-1 items-center gap-8 px-4 py-8 lg:grid-cols-2 lg:gap-12">
         {/* Contenido principal - Lado izquierdo */}
         <ParallaxElement speed={0.3}>
           <motion.div
@@ -26,19 +26,22 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex items-center space-x-2 mb-4"
+              className="mb-3 flex items-center space-x-2 lg:mb-4"
             >
-              <Star className="w-5 h-5 text-casino-amber" />
-              <span className="text-sm font-medium text-gray-200">Casino Premium Experience</span>
+              <Star className="h-4 w-4 text-casino-amber lg:h-5 lg:w-5" />
+              <span className="text-xs font-medium text-gray-200 lg:text-sm">
+                Casino Premium Experience
+              </span>
             </motion.div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold mb-6 gradient-text">
+            <h1 className="gradient-text mb-4 text-4xl font-bold md:text-5xl lg:mb-6 lg:text-7xl">
               Casino Royale
             </h1>
-            
-            <p className="text-xl mb-8 text-gray-300 leading-relaxed">
-              Descubre todo sobre el mundo del casino con nuestro asistente virtual inteligente. 
-              Información completa sobre regulaciones, historia y todo lo que necesitas saber.
+
+            <p className="mb-6 text-base leading-relaxed text-gray-300 md:text-lg lg:mb-8 lg:text-xl">
+              Descubre todo sobre el mundo del casino con nuestro asistente
+              virtual inteligente. Información completa sobre regulaciones,
+              historia y todo lo que necesitas saber.
             </p>
 
             {/* Contadores animados */}
@@ -46,25 +49,31 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-3 gap-6 mb-8"
+              className="mb-6 grid grid-cols-3 gap-4 lg:mb-8 lg:gap-6"
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-casino-amber mb-1">
+                <div className="mb-1 text-2xl font-bold text-casino-amber md:text-3xl">
                   <AnimatedCounter value={15} suffix="+" />
                 </div>
-                <div className="text-sm text-gray-200">Años de Experiencia</div>
+                <div className="text-[10px] text-gray-200 md:text-sm">
+                  Años de Experiencia
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-casino-amber mb-1">
+                <div className="mb-1 text-2xl font-bold text-casino-amber md:text-3xl">
                   <AnimatedCounter value={50000} suffix="+" />
                 </div>
-                <div className="text-sm text-gray-200">Usuarios Satisfechos</div>
+                <div className="text-[10px] text-gray-200 md:text-sm">
+                  Usuarios Satisfechos
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-casino-amber mb-1">
+                <div className="mb-1 text-2xl font-bold text-casino-amber md:text-3xl">
                   <AnimatedCounter value={99} suffix="%" />
                 </div>
-                <div className="text-sm text-gray-200">Tasa de Satisfacción</div>
+                <div className="text-[10px] text-gray-200 md:text-sm">
+                  Tasa de Satisfacción
+                </div>
               </div>
             </motion.div>
 
@@ -73,14 +82,14 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex items-center space-x-8 text-sm"
+              className="flex items-center space-x-4 text-xs lg:space-x-8 lg:text-sm"
             >
               <div className="flex items-center space-x-2">
-                <Crown className="w-4 h-4 text-casino-amber" />
+                <Crown className="h-3 w-3 text-casino-amber lg:h-4 lg:w-4" />
                 <span className="text-gray-200">Información Completa</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Award className="w-4 h-4 text-casino-amber" />
+                <Award className="h-3 w-3 text-casino-amber lg:h-4 lg:w-4" />
                 <span className="text-gray-200">Asistente Virtual</span>
               </div>
             </motion.div>
@@ -94,9 +103,9 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center lg:justify-end"
         >
-          <SlotMachine className="w-full max-w-md" />
+          <SlotMachine className="w-full max-w-xs sm:max-w-sm md:max-w-md" />
         </motion.div>
       </div>
     </section>
   )
-} 
+}

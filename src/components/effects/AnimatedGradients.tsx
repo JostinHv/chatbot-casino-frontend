@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 export function AnimatedGradients() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
       {/* Gradiente animado principal */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-casino-dark via-casino-navy to-casino-slate"
@@ -22,10 +22,10 @@ export function AnimatedGradients() {
           ease: 'easeInOut',
         }}
       />
-      
-             {/* Overlay de gradiente dorado */}
-       <motion.div
-         className="absolute inset-0 bg-gradient-to-r from-casino-amber/3 via-transparent to-casino-amber/3"
+
+      {/* Overlay de gradiente dorado */}
+      <motion.div
+        className="from-casino-amber/3 to-casino-amber/3 absolute inset-0 bg-gradient-to-r via-transparent"
         animate={{
           opacity: [0.1, 0.3, 0.1],
         }}
@@ -35,10 +35,10 @@ export function AnimatedGradients() {
           ease: 'easeInOut',
         }}
       />
-      
-             {/* Efecto de brillo superior */}
-       <motion.div
-         className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-casino-amber/5 to-transparent"
+
+      {/* Efecto de brillo superior */}
+      <motion.div
+        className="absolute left-0 right-0 top-0 h-32 bg-gradient-to-b from-casino-amber/5 to-transparent"
         animate={{
           opacity: [0.2, 0.5, 0.2],
         }}
@@ -50,4 +50,4 @@ export function AnimatedGradients() {
       />
     </div>
   )
-} 
+}

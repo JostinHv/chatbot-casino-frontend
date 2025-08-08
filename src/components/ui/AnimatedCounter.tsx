@@ -10,11 +10,11 @@ interface AnimatedCounterProps {
   className?: string
 }
 
-export function AnimatedCounter({ 
-  value, 
-  suffix = '', 
+export function AnimatedCounter({
+  value,
+  suffix = '',
   duration = 2,
-  className = '' 
+  className = '',
 }: AnimatedCounterProps) {
   const [displayValue, setDisplayValue] = useState(0)
   const count = useMotionValue(0)
@@ -22,11 +22,11 @@ export function AnimatedCounter({
 
   useEffect(() => {
     const controls = animate(count, value, { duration })
-    
+
     const unsubscribe = rounded.on('change', (latest) => {
       setDisplayValue(latest)
     })
-    
+
     return () => {
       controls.stop()
       unsubscribe()
@@ -39,4 +39,4 @@ export function AnimatedCounter({
       {suffix}
     </motion.span>
   )
-} 
+}

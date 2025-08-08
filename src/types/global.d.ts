@@ -5,7 +5,9 @@ declare namespace JSX {
       'chat-title'?: string
       'agent-id'?: string
       'language-code'?: string
-      [key: string]: any
+      // Permitir atributos de estilo en línea y props del web component de Dialogflow
+      style?: React.CSSProperties
+      [key: string]: unknown
     }
   }
-} 
+}

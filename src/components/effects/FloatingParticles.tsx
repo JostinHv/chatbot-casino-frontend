@@ -22,11 +22,11 @@ const particles: Particle[] = Array.from({ length: 20 }, (_, i) => ({
 
 export function FloatingParticles() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute w-1 h-1 bg-casino-gold/60 rounded-full"
+          className="absolute h-1 w-1 rounded-full bg-casino-gold/60"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -49,4 +49,4 @@ export function FloatingParticles() {
       ))}
     </div>
   )
-} 
+}

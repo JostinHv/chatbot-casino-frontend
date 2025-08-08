@@ -17,8 +17,10 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
-        casino: 'bg-gradient-to-r from-casino-amber to-casino-orange text-white hover:shadow-lg transition-all duration-300 hover:scale-105',
-        glass: 'bg-white/5 backdrop-blur-sm border border-white/10 text-white hover:bg-white/10',
+        casino:
+          'btn-shine bg-gradient-to-r from-casino-amber to-casino-orange text-white hover:shadow-lg transition-all duration-300 hover:scale-105',
+        glass:
+          'btn-shine bg-white/5 backdrop-blur-sm border border-white/10 text-white hover:bg-white/10',
       },
       size: {
         default: 'h-10 px-4 py-2',
@@ -54,4 +56,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = 'Button'
 
-export { Button, buttonVariants } 
+export { Button, buttonVariants }
